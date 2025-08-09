@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Office Worker - AI Assistant Suite",
-  description: "Your AI-powered office assistant suite with voice, interactive, and booking agents",
+  title: "Office Entertainer - AI Comedy Suite",
+  description: "AI-powered roast master, virtual MC, and booking agent. Entertainment that's HR-safe (probably).",
 };
 
 export const viewport: Viewport = {
