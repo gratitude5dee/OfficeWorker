@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenAI Vision Camera",
-  description: "Real-time AI vision with voice interaction",
+  title: "Office Worker - AI Assistant Suite",
+  description: "Your AI-powered office assistant suite with voice, interactive, and booking agents",
 };
 
 export const viewport: Viewport = {
