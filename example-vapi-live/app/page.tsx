@@ -17,7 +17,7 @@ console.warn = (...args) => {
   originalConsoleWarn.apply(console, args);
 };
 
-function GeminiLiveMVP() {
+function OpenAIVisionMVP() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hasCamera, setHasCamera] = useState(false);
@@ -371,5 +371,5 @@ function GeminiLiveMVP() {
 }
 
 export default function Home() {
-  return <GeminiLiveMVP />;
+  return <OpenAIVisionMVP />;
 }

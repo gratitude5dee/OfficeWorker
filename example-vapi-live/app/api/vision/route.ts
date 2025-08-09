@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
 
 const VISION_PROMPT = `You generate clear, detailed descriptions of what's visible in a camera image for a voice agent.
@@ -15,14 +15,8 @@ Examples:
 
 No opinions or commentary—only clear, factual, and descriptive summaries.`;
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
-const model = genAI.getGenerativeModel({ 
-  model: "gemini-2.0-flash-lite",
-  generationConfig: {
-    maxOutputTokens: 150,
-    temperature: 0.2,
-    topP: 0.8,
-  }
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 let lastRequestTime = 0;
@@ -58,17 +52,30 @@ export async function POST(request: NextRequest) {
 
     const prompt = userPrompt || VISION_PROMPT;
 
-    const result = await model.generateContent([
-      prompt,
-      {
-        inlineData: {
-          data: imageBase64,
-          mimeType: "image/jpeg"
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: prompt
+            },
+            {
+              type: "image_url",
+              image_url: {
+                url: `data:image/jpeg;base64,${imageBase64}`
+              }
+            }
+          ]
         }
-      }
-    ]);
+      ],
+      max_tokens: 150,
+      temperature: 0.2,
+    });
 
-    const description = result.response.text();
+    const description = response.choices[0]?.message?.content || "No description available";
 
     return NextResponse.json({
       description,
@@ -84,7 +91,7 @@ export async function POST(request: NextRequest) {
         { 
           error: "API quota exceeded", 
           retryAfter: 60,
-          message: "Gemini API quota exceeded. Please wait 60 seconds.",
+          message: "OpenAI API quota exceeded. Please wait 60 seconds.",
           details: "Consider upgrading your API plan for higher limits"
         },
         { status: 429 }

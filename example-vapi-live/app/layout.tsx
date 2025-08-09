@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gemini Live Camera",
+  title: "OpenAI Vision Camera",
   description: "Real-time AI vision with voice interaction",
 };
 
