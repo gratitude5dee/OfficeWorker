@@ -72,6 +72,9 @@ export default function HomePage() {
                   <div className="bg-red-600 text-black px-4 py-2 inline-block font-bold text-sm">
                     [AI COMEDY • ROAST MASTER • EVENT MC]
                   </div>
+                  <div className="text-red-600 text-5xl font-bold mt-4 tracking-wider">
+                    CALL NOW: +1 (510) 210 9909
+                  </div>
                   <div className="text-white text-lg mt-4 font-mono max-w-4xl mx-auto">
                     &gt; AI-POWERED ENTERTAINMENT SUITE
                     <br />
